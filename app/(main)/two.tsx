@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, StatusBar } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: (StatusBar.currentHeight !== undefined ? StatusBar.currentHeight*2 : 0),
+    // paddingTop: (StatusBar.currentHeight !== undefined ? StatusBar.currentHeight*2 : 0),
   },
   title: {
     fontSize: 20,
