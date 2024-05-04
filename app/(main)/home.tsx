@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 
 import { SearchBar } from '@rneui/themed';
 import { Text, View } from '@/components/Themed';
@@ -6,48 +6,41 @@ import { Text, View } from '@/components/Themed';
 import Section from '@/components/home/Section';
 import Article from '@/components/article/Article';
 import images from '@/assets/images';
+import Search from '@/components/home/Search';
+
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <SearchBar platform='android' />
+      <Search/>
       <Section>
         <Section.Title>Minecraft Components</Section.Title>
-        <Section.Item name='Redstone' />
-        <Section.Item name='Redstone Torch' />
-        <Section.Item name='Repeater' />
+        <Section.ItemList>
+          <Section.ItemList.Item name='Redstone' href='article'/>
+          <Section.ItemList.Item name='Redstone Torch' />
+          <Section.ItemList.Item name='Repeater' />
+        </Section.ItemList>
       </Section>
       <Section>
         <Section.Title>Digital Logic</Section.Title>
-        <Section.Item name='Inverter' />
-        <Section.Item name='AND Gate' />
-        <Section.Item name='OR Gate' />
-        <Section.Item name='XOR Gate' />
+        <Section.ItemList>
+          <Section.ItemList.Item name='Inverter' />
+          <Section.ItemList.Item name='AND Gate' />
+          <Section.ItemList.Item name='OR Gate' />
+          <Section.ItemList.Item name='XOR Gate' />
+        </Section.ItemList>
       </Section>
-      <Article>
-        <Article.Head image={images.titleScene}>
-          <Article.Head.Title>Redstone Dust</Article.Head.Title>
-          <Article.Head.Category>Minecraft Components</Article.Head.Category>
-        </Article.Head>
-        <Article.Image image={images.title} />
-      </Article>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: 0,
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    gap: 30,
+    marginHorizontal: 20
   },
 });

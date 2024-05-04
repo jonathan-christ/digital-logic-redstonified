@@ -1,7 +1,9 @@
 const title = require('./images/title.png')
 const titleScene = require('./images/splash.png')
+const splash = require('./images/splash.png')
 
-export default{
-title,
-titleScene
+export default {
+    title,
+    titleScene,
+    splash
 };

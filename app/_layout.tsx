@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import images from '@/assets/images';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -51,7 +52,16 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)" options={{ headerShown: true, headerTitle: ""}} />
+        <Stack.Screen 
+          name="(main)" 
+          options={{ 
+            headerShown: true, 
+            headerTitle: "",
+            headerBackImageSource: images.splash,
+            headerStyle: {
+              backgroundColor: 'black'
+            },
+          }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
