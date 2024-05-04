@@ -34,9 +34,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="article"
+        name="articles/[article]"
         options={{
-          title: 'Tab Two',
+          title: 'Article',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

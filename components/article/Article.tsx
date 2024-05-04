@@ -1,32 +1,44 @@
 import React, { ReactNode, ReactPortal } from 'react';
-import { ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, ScrollView, ImageBackground, Image } from 'react-native';
 import { Text, View } from '../Themed';
 import Header from './Header';
+import Body from './Body';
 
 type ArticleProps = {
     children: ReactNode
 }
 
-type ImageProps = {
-    image: object
-}
-
 const Article = ({ children }: ArticleProps) => {
     return (
         <ScrollView>
-            {children}
+            <View style={styles.view}>
+                {children}
+            </View>
         </ScrollView>
     )
 }
 
-Article.Image = (props: ImageProps) => {
-    return (
-        <Image source={props.image} />
-    )
-}
-
 Article.Head = Header
-Article.Body = undefined
+Article.Body = Body
 
 export default Article
+
+const styles = StyleSheet.create({
+    
+    image: {
+        position: 'absolute',
+        height: 500,
+        width: 500,
+    },
+    title: {
+        fontSize: 20
+    },
+    view: {
+        flex: 1,
+        position: 'relative',
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'red'
+    }
+})
 

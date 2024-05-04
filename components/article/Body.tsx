@@ -1,28 +1,6 @@
 import React, { ReactNode, ReactPortal } from 'react';
-import { ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Text, View } from '../Themed';
-import Header from './Header';
-
-/*
-Obtaining [Item Name]
-Methods to obtain the item (mining, crafting, trading, etc.).
-Properties
-Physical characteristics and stack information.
-Usage
-How the item is used in redstone circuits and crafting recipes.
-Mechanics
-Detailed explanation of how the item functions within a circuit.
-Technical Information
-Data values and block states specific to the item.
-Tutorials
-Step-by-step guides and examples using the item in circuits.
-Trivia
-Fun facts and lesser-known details about the item.
-Gallery
-Visuals showcasing the item in action.
-External Links
-Additional resources for further learning.
-*/
 
 type BodyProps = {
     children: ReactNode
@@ -31,7 +9,7 @@ type BodyProps = {
 type ContentProps = {
     image?: object,
     title: string,
-    children: string
+    children: ReactNode
 }
 
 type ImageProps = {
@@ -40,7 +18,7 @@ type ImageProps = {
 
 const Body = ({ children }: BodyProps) => {
     return (
-        <View>
+        <View style={styles.view}>
             {children}
         </View>
     )
@@ -50,12 +28,18 @@ Body.Content = (props: ContentProps) => {
     return (
         <View>
             <Text>{props.title}</Text>
-            <Text>
-                {props.children}
-            </Text>
+            {props.children}
         </View>
     )
 }
 
 export default Body
+
+const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        flexDirection: 'column',
+        gap: 20
+    }
+})
 

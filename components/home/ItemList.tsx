@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Button, ScrollView, ImageBackground, StyleSheet, Pressable } from 'react-native';
 import { Text, View } from '../Themed';
-import { router } from 'expo-router';
+import { Link } from 'expo-router';
 
 import images from '@/assets/images';
 
@@ -13,6 +13,10 @@ type ItemProps = {
     name: string,
     image?: object,
     href?: string
+}
+
+type data = {
+    [key: string]: any
 }
 
 const ItemList = ({ children }: ItemListProps) => {
@@ -27,16 +31,14 @@ const ItemList = ({ children }: ItemListProps) => {
 
 ItemList.Item = (props: ItemProps) => {
     return (
-        <View>
-            <Pressable
-                style={styles.press}
-                onPress={() => { router.navigate('(main)/' + (props.href ?? 'home')) }}
-            >
-                <ImageBackground blurRadius={5} style={styles.item} source={props.image ?? images.title}>
-                    <Text style={styles.title}>{props.name}</Text>
-                </ImageBackground>
-            </Pressable>
-        </View>
+        <Link
+            style={styles.press}
+            href={{ pathname: '/(main)/articles/[article]', params: {article: props.name}}}
+        >
+            <ImageBackground blurRadius={5} style={styles.item} source={props.image ?? images.title}>
+                <Text style={styles.title}>{props.name}</Text>
+            </ImageBackground>
+        </Link>
     )
 }
 
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         gap: 15,
-        width: '100%'
+        width: '100%',
     },
     item: {
         flex: 1,
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     press: {
-        height: '100%',
-        width: '100%'
+        // height: '100%',
+        // width: '100%'
     }
 })
