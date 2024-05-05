@@ -19,7 +19,8 @@ const Search: React.FunctionComponent<SearchBarComponentProps> = ({ onSearch }) 
     <View style={styles.view}>
       <SearchBar
         round
-        placeholder="Type Here..."
+        style={{fontSize: 16}}
+        placeholder="Enter search terms..."
         containerStyle={styles.search}
         inputContainerStyle={styles.input}
         onChangeText={updateSearch}
