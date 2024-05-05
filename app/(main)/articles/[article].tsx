@@ -7,6 +7,7 @@ import Article from '@/components/article/Article';
 
 import images from '@/assets/images';
 import { Data } from '@/assets/data';
+import React from 'react';
 
 type ContentProps = {
   title: string,

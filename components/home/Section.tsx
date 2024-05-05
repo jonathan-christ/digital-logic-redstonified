@@ -4,6 +4,7 @@ import { Text, View } from '../Themed';
 
 import images from '@/assets/images';
 import ItemList from './ItemList';
+import React from 'react';
 
 type SectionProps = {
     children: ReactNode

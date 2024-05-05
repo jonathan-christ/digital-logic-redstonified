@@ -1,31 +1,56 @@
-import { StyleSheet, ScrollView } from 'react-native';
-import { Text, View } from '@/components/Themed';
-
+// Home.tsx
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { View } from '@/components/Themed';
 import Section from '@/components/home/Section';
 import Search from '@/components/home/Search';
-
 import images from '@/assets/images';
 
+const items = [
+  { name: 'Redstone' },
+  { name: 'Redstone Torch' },
+  { name: 'Repeater' },
+];
+
+const gates = [
+  { name: 'Inverter' },
+  { name: 'AND Gate' },
+  { name: 'OR Gate' },
+  { name: 'XOR Gate' },
+];
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredGates = gates.filter((gate) =>
+    gate.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <View style={styles.container}>
-      <Search /> 
+      <Search onSearch={handleSearch} />
       <Section>
         <Section.Title>Minecraft Components</Section.Title>
         <Section.ItemList>
-          <Section.ItemList.Item name='Redstone' />
-          <Section.ItemList.Item name='Redstone Torch' />
-          <Section.ItemList.Item name='Repeater' />
+          {filteredItems.map((item, index) => (
+            <Section.ItemList.Item key={index} name={item.name} />
+          ))}
         </Section.ItemList>
       </Section>
       <Section>
-        <Section.Title>Digital Logic</Section.Title>
+        <Section.Title>Digital Logic Gates</Section.Title>
         <Section.ItemList>
-          <Section.ItemList.Item name='Inverter' />
-          <Section.ItemList.Item name='AND Gate' />
-          <Section.ItemList.Item name='OR Gate' />
-          <Section.ItemList.Item name='XOR Gate' />
+          {filteredGates.map((gate, index) => (
+            <Section.ItemList.Item key={index} name={gate.name} />
+          ))}
         </Section.ItemList>
       </Section>
     </View>
@@ -34,11 +59,10 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    height: 0,
     flex: 1,
     alignItems: 'flex-start',
     flexDirection: 'column',
     gap: 30,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
 });
