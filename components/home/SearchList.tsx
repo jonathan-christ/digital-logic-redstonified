@@ -44,7 +44,6 @@ export default SearchList
 
 const styles = StyleSheet.create({
     view : {
-        width: '100%',
         paddingHorizontal: 10,
     },
     itemContainer: {
@@ -55,6 +54,7 @@ const styles = StyleSheet.create({
         gap: 0,
     },
     item: {
+        width: '100%',
         backgroundColor: 'transparent',
         flex: 1,
         flexDirection: 'row',
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         objectFit: 'contain',
-        backgroundColor: 'red'
+        backgroundColor: ''
     }
 })

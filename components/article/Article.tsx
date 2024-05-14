@@ -1,6 +1,7 @@
 import React, { ReactNode, ReactPortal } from 'react';
 import { StyleSheet, ScrollView, ImageBackground, Image } from 'react-native';
 import { Text, View } from '../Themed';
+import { useFonts } from 'expo-font';
 import Header from './Header';
 import Body from './Body';
 
@@ -24,21 +25,16 @@ Article.Body = Body
 export default Article
 
 const styles = StyleSheet.create({
-    
-    image: {
-        position: 'absolute',
-        height: 500,
-        width: 500,
-    },
     title: {
         fontSize: 20
     },
     view: {
         flex: 1,
         position: 'relative',
-        height: '100%',
+        height: 'auto',
+        paddingBottom: 40,
         width: '100%',
-        backgroundColor: 'red'
+        fontFamily: 'Minecraft'
     }
 })
 

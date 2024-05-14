@@ -24,9 +24,14 @@ const Section = ({ children }: SectionProps) => {
 
 Section.Title = ({ children }: TextProps) => {
     return (
-        <Text style={styles.title}>
-            {children}
-        </Text>
+        <View style={styles.titleSect}>
+            <View style={styles.titleBar}></View>
+            <View style={styles.titleCont}>
+                <Text style={styles.title}>
+                    {children}
+                </Text>
+            </View>
+        </View>
     )
 }
 
@@ -36,15 +41,47 @@ export default Section
 
 const styles = StyleSheet.create({
     section: {
-        height: 200,
+
+        paddingHorizontal: 20,
+        // backgroundColor: 'rgb(50,0,0)',
+        height: 225,
         width: '100%',
         gap: 15,
-        overflow: 'hidden'
+        overflow: 'visible',
+        borderBottomWidth: 4,
     },
     title: {
         fontSize: 20,
+        textAlign: 'center'
     },
     image: {
 
+    },
+    titleCont: {
+        position: 'absolute',
+        left: 0,
+        // top: -20,
+        // width: '75%',
+        // padding: 10,
+        // backgroundColor: 'rgb(50,0,0)',
+        // borderWidth: 4,
+        // borderBottomColor: 'rgb(100,0,0)',
+        // borderLeftColor: 'rgb(125, 38,38)',
+        // borderRightColor: 'rgb(125, 38,38)',
+        // borderTopColor: 'rgb(255,81,81)'
+    },
+    titleSect: {
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        position: 'relative',
+        flexDirection: 'row',
+        paddingBottom: 30,
+    },
+    titleBar: {
+        flex: 1,
+        height: 2,
+        // borderWidth: 2,
+        // borderTopColor: 'rgb(255,81,81)',
+        // borderBottomColor: 'rgb(125, 38,38)',
     }
 })

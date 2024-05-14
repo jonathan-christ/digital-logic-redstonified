@@ -26,8 +26,10 @@ const Body = ({ children }: BodyProps) => {
 
 Body.Content = (props: ContentProps) => {
     return (
-        <View>
-            <Text>{props.title}</Text>
+        <View style={styles.content}>
+            <View style={styles.title}>
+                <Text style={{ fontSize: 20 }}>{props.title}</Text>
+            </View>
             {props.children}
         </View>
     )
@@ -37,9 +39,18 @@ export default Body
 
 const styles = StyleSheet.create({
     view: {
+        marginTop: 40,
+        marginHorizontal: 20,
         flex: 1,
         flexDirection: 'column',
-        gap: 20
+        gap: 40
+    },
+    title: {
+    },
+    content: {
+        flex: 1,
+        flexDirection: 'column',
+        gap: 10
     }
 })
 

@@ -25,6 +25,8 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Minecraft: require('../assets/fonts/Minecraft-Regular.otf'),
+    'Minecraft-Bold': require('../assets/fonts/Minecraft-Bold.otf'),
     ...FontAwesome.font,
   });
 
@@ -56,12 +58,12 @@ function RootLayoutNav() {
         <Stack.Screen 
           name="(main)" 
           options={{ 
-            headerShown: true, 
+            headerShown: false, 
             headerTitle: "",
             headerBackImageSource: images.splash,
-            headerStyle: {
-              backgroundColor: 'black'
-            },
+            // headerStyle: {
+            //   backgroundColor: 'black'
+            // },
           }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>

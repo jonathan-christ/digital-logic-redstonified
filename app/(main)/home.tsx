@@ -1,7 +1,7 @@
 // Home.tsx
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
-import { View } from '@/components/Themed';
+import { ScrollView, StyleSheet } from 'react-native';
+import { View, Text } from '@/components/Themed';
 import { Data } from '@/assets/data';
 
 import SearchList from '@/components/home/SearchList';
@@ -19,7 +19,6 @@ export default function Home() {
     })
 
     setData({ items, gates })
-    console.log("bom")
   }
 
 
@@ -38,60 +37,85 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Search onSearch={handleSearch} />
-      {searchQuery.length === 0 ?
-        <>
-          <Section>
-            <Section.Title>Minecraft Components</Section.Title>
-            <Section.ItemList>
-              {data.items.map((item, index) => (
-                <Section.ItemList.Item key={index} name={item} />
+      <View style={styles.header}>
+        <View style={{ paddingHorizontal: 20, backgroundColor: 'transparent' }}>
+          <Search onSearch={handleSearch} />
+        </View>
+        <View style={styles.titleBar}></View>
+      </View>
+      <ScrollView style={{ flex:1, margin: 0, paddingTop: 40, width: '100%' }}>
+        {searchQuery.length === 0 ?
+          <View style={{ gap: 20 }}>
+            <Section>
+              <Section.Title>Basic Components</Section.Title>
+              <Section.ItemList>
+                {data.items.map((item, index) => (
+                  <Section.ItemList.Item key={index} name={item} border />
+                ))}
+              </Section.ItemList>
+            </Section>
+            <Section>
+              <Section.Title>Digital Logic Gates</Section.Title>
+              <Section.ItemList>
+                {data.gates.map((gate, index) => (
+                  <Section.ItemList.Item key={index} name={gate} border />
+                ))}
+              </Section.ItemList>
+            </Section>
+          </View> :
+          <View style={styles.searchView}>
+            <SearchList>
+              {filtered.map((item, index) => (
+                <SearchList.Item key={index} name={item} />
               ))}
-            </Section.ItemList>
-          </Section>
-          <Section>
-            <Section.Title>Digital Logic Gates</Section.Title>
-            <Section.ItemList>
-              {data.gates.map((gate, index) => (
-                <Section.ItemList.Item key={index} name={gate} />
-              ))}
-            </Section.ItemList>
-          </Section>
-        </> :
-        <ScrollView style={styles.searchView}>
-          <SearchList>
-            {filtered.map((item, index) => (
-              <SearchList.Item key={index} name={item} />
-            ))}
-          </SearchList>
-          <Text style={styles.result}>
-            Found {filtered.length} result{(filtered.length != 1) && 's'}
-          </Text>
-        </ScrollView>
-      }
-
-    </View>
+            </SearchList>
+            <Text style={styles.result}>
+              Found {filtered.length} result{(filtered.length != 1) && 's'}
+            </Text>
+          </View>
+        }
+      </ScrollView >
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    position: 'relative',
+    width: '100%',
+    backgroundColor: 'rgb(50,0,0)',
+    paddingTop: 70,
+    paddingBottom: 40,
+    borderBottomWidth: 4,
+  },
   container: {
     flex: 1,
     alignItems: 'flex-start',
     flexDirection: 'column',
-    gap: 30,
-    marginHorizontal: 20,
   },
   searchView: {
-    width: '100%',
-    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 100,
     flexDirection: 'column',
   },
   result: {
     paddingTop: 40,
+    backgroundColor: 'transparent',
     textAlign: 'center',
     width: '100%',
     color: 'white',
     fontSize: 12
+  },
+  titleBar: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    height: 2,
+    borderWidth: 2,
+    borderTopColor: 'rgb(255,81,81)',
+    borderBottomColor: 'rgb(125, 38,38)',
   }
 });
