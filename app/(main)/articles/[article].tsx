@@ -24,7 +24,7 @@ export default function Page() {
   const { article } = useLocalSearchParams<{ article: string }>()
 
   return (
-    <Content {...Data[article ?? "Redstone"]} />
+    <Content {...Data[article ?? "Redstone Dust"]} />
   )
 }
 

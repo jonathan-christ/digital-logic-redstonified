@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         width: '100%',
         gap: 15,
         overflow: 'visible',
-        borderBottomWidth: 4,
     },
     title: {
         fontSize: 20,

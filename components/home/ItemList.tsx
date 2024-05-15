@@ -4,6 +4,7 @@ import { Text, View } from '../Themed';
 import { Link } from 'expo-router';
 
 import images from '@/assets/images';
+import Colors from '@/constants/Colors';
 
 type ItemListProps = {
     children: ReactNode
@@ -33,18 +34,23 @@ const ItemList = ({ children }: ItemListProps) => {
 ItemList.Item = (props: ItemProps) => {
     const bstyle = {
         ...styles.item,
-        ...(props.border ? styles.border : {})
+        ...(props.border ? Colors.border : {})
     }
     return (
         <Link
             style={styles.press}
             href={{ pathname: '/(main)/articles/[article]', params: { article: props.name } }}
+            asChild
         >
-            <ImageBackground blurRadius={5} style={bstyle} source={props.image ?? images.title}>
-                <View style={styles.overlay}>
-                    <Text style={styles.title}>{props.name}</Text>
-                </View>
-            </ImageBackground>
+            <Pressable>
+                {({ pressed }) => (
+                    <ImageBackground blurRadius={5} style={{ ...bstyle, ...(pressed ? Colors.borderHL : {}) }} source={props.image ?? images.title}>
+                        <View style={styles.overlay}>
+                            <Text style={styles.title}>{props.name}</Text>
+                        </View>
+                    </ImageBackground>
+                )}
+            </Pressable>
         </Link>
     )
 }
@@ -67,14 +73,6 @@ const styles = StyleSheet.create({
         maxHeight: 150,
         maxWidth: 150,
         backgroundColor: 'black',
-    },
-    border: {
-        borderWidth: 4,
-        borderBottomWidth: 4,
-        borderBottomColor: 'rgb(100,74,0)',
-        borderLeftColor: 'rgb(125, 102,38)',
-        borderRightColor: 'rgb(125, 102,38)',
-        borderTopColor: 'rgb(255,209,81)',
     },
     title: {
         padding: 5,

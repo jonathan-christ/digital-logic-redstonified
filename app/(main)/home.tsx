@@ -1,12 +1,14 @@
 // Home.tsx
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet,ImageBackground } from 'react-native';
 import { View, Text } from '@/components/Themed';
 import { Data } from '@/assets/data';
 
 import SearchList from '@/components/home/SearchList';
 import Section from '@/components/home/Section';
 import Search from '@/components/home/Search';
+
+import images from '@/assets/images';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -15,7 +17,7 @@ export default function Home() {
   const retrieveData = () => {
     let items: string[] = [], gates: string[] = [];
     Object.keys(Data).forEach((el: string) => {
-      (Data[el].category === "Basic Components" ? items : gates).push(el)
+      (Data[el].category === "Basic Components" ? items : gates).push(Data[el].title)
     })
 
     setData({ items, gates })
@@ -31,12 +33,12 @@ export default function Home() {
     (item.toLowerCase().includes(searchQuery.toLowerCase()))
   )
 
-  useEffect(() => {
+  useEffect(() => { 
     retrieveData()
   }, [])
 
   return (
-    <View style={styles.container}>
+    <ImageBackground style={styles.container} source={images.bg_menu}>
       <View style={styles.header}>
         <View style={{ paddingHorizontal: 20, backgroundColor: 'transparent' }}>
           <Search onSearch={handleSearch} />
@@ -70,12 +72,12 @@ export default function Home() {
               ))}
             </SearchList>
             <Text style={styles.result}>
-              Found {filtered.length} result{(filtered.length != 1) && 's'}
+              Found <Text style={{color: 'rgb(255,110, 110)'}}>{filtered.length}</Text> result{(filtered.length != 1) && 's'}
             </Text>
           </View>
         }
       </ScrollView >
-    </View >
+    </ImageBackground >
   );
 }
 
@@ -86,12 +88,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(50,0,0)',
     paddingTop: 70,
     paddingBottom: 40,
-    borderBottomWidth: 4,
   },
   container: {
     flex: 1,
     alignItems: 'flex-start',
     flexDirection: 'column',
+    objectFit: 'fill',
+    height: '100%',
+    width: '100%'
   },
   searchView: {
     justifyContent: 'center',
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     height: 2,
     borderWidth: 2,
-    borderTopColor: 'rgb(255,81,81)',
-    borderBottomColor: 'rgb(125, 38,38)',
+    borderBottomColor: 'rgb(100,0,0)',
+    borderTopColor: 'rgb(200,35,35)',
   }
 });

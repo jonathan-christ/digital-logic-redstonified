@@ -3,6 +3,7 @@ import { Button, ScrollView, Image, StyleSheet, Pressable } from 'react-native';
 import { Text, View } from '../Themed';
 import { Link } from 'expo-router';
 
+import Colors from '@/constants/Colors';
 import images from '@/assets/images';
 
 type ItemListProps = {
@@ -26,15 +27,23 @@ const SearchList = ({ children }: ItemListProps) => {
 }
 
 SearchList.Item = (props: ItemProps) => {
+    const textHL = { color: 'rgb(255,189,81)' }
     return (
         <Link
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             href={{ pathname: '/(main)/articles/[article]', params: { article: props.name } }}
+            asChild
         >
-            <View style={styles.item}>
-                <Image blurRadius={5} style={styles.image} source={props.image ?? images.title} />
-                <Text style={styles.title}>{props.name}</Text>
-            </View>
+            <Pressable>
+                {({ pressed }) => (
+                    <View style={styles.item}>
+                        <View style={[styles.imgCont, (pressed ? Colors.borderHL : {})]}>
+                            <Image blurRadius={5} style={styles.image} source={props.image ?? images.title} />
+                        </View>
+                        <Text style={[styles.title, (pressed ? textHL : {})]}>{props.name}</Text>
+                    </View>
+                )}
+            </Pressable>
         </Link>
     )
 }
@@ -43,14 +52,23 @@ SearchList.Item = (props: ItemProps) => {
 export default SearchList
 
 const styles = StyleSheet.create({
-    view : {
+    view: {
+        marginTop: -15,
         paddingHorizontal: 10,
+    },
+    imgCont: {
+        height: 75,
+        width: 75,
+
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        ...Colors.border
     },
     itemContainer: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        borderRadius: 15,
-        backgroundColor: 'rgb(40,40,40)',
+        // backgroundColor: 'rgb(50,0,0)',
         gap: 0,
     },
     item: {
@@ -60,14 +78,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: '100%',
         padding: 15,
-        
-        justifyContent: 'center',
+
+        // justifyContent: 'center',
         alignItems: 'center',
-        
-        gap: 10,
+
+        gap: 20,
     },
     title: {
-        fontSize: 14,
+        fontSize: 16,
     },
     image: {
         borderRadius: 15,

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'rgb(50,0,0)',
         borderWidth: 4,
-        borderBottomColor: 'rgb(125,38,38)',
+        borderBottomColor: 'rgb(125,10,10)',
         overflow: 'visible',
         zIndex: 1,
         justifyContent: 'center'
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'pink',
         borderWidth: 4,
         borderBottomColor: 'rgb(100,0,0)',
-        borderLeftColor: 'rgb(125, 38,38)',
-        borderRightColor: 'rgb(125, 38,38)',
-        borderTopColor: 'rgb(255,81,81)',
+        borderLeftColor: 'rgb(125, 10,10)',
+        borderRightColor: 'rgb(125, 10,10)',
+        borderTopColor: 'rgb(200,35,35)',
     }
 })
