@@ -70,8 +70,11 @@ export default function Home() {
               {filtered.map((item, index) => (
                 <SearchList.Item key={index} name={item} />
               ))}
+              {filtered.length == 0 && 
+                <Text style={[styles.result, {paddingTop: 20} ]}>There's nothing here ....</Text>
+              }
             </SearchList>
-            <Text style={styles.result}>
+            <Text style={[styles.result, (filtered.length == 0 ? {height: 0} : {})]}>
               Found <Text style={{color: 'rgb(255,110, 110)'}}>{filtered.length}</Text> result{(filtered.length != 1) && 's'}
             </Text>
           </View>
@@ -107,6 +110,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     backgroundColor: 'transparent',
     textAlign: 'center',
+    height: 50,
     width: '100%',
     color: 'white',
     fontSize: 12
