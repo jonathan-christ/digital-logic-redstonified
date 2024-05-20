@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     image: {
-
+        objectFit: 'scale-down'
     },
     titleCont: {
         position: 'absolute',

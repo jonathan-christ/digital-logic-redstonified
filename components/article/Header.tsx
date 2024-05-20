@@ -18,11 +18,13 @@ type ImageProps = {
 
 const Header = ({ children, image }: HeaderProps) => {
     return (
-        <ImageBackground style={styles.header} source={images.splash}>
-            <ImageBackground style={styles.view} source={image}>
-                {children}
+        <View style={styles.header}>
+            <ImageBackground blurRadius={5} style={[styles.view, {paddingHorizontal: 0}]} source={image}>
+                <View style={[styles.view, {borderWidth: 0, backgroundColor: 'rgba(0,0,0,0.5)'}]}>
+                    {children}
+                </View>
             </ImageBackground>
-        </ImageBackground>
+        </View>
     )
 }
 
@@ -63,12 +65,12 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgb(125,10,10)',
         overflow: 'visible',
         zIndex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     image: {
         height: 125,
         width: 125,
-        backgroundColor: 'rgb(50,0,0)',
+        backgroundColor: 'black',
         objectFit: 'contain'
     },
     header: {
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
         right: 20,
         bottom: -50,
         position: 'absolute',
-        flex:1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'pink',

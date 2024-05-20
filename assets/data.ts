@@ -1,7 +1,15 @@
+import images from "./images"
+
 type data = {
+    Components: components,
+    Gates: gates
+}
+
+type components = {
     [k: string]: {
         title: string,
         category: string,
+        image: object,
         data: {
             Introduction: string[];
             Obtaining: string[];
@@ -9,17 +17,49 @@ type data = {
             Usage: string[];
             Mechanics: string[];
             "Technical Information": string[];
-            Tutorials: string[];
+            Tutorials: {
+                text: string,
+                img: object
+            }[];
             Trivia: string[];
-            Gallery: string[];
+            Gallery: {
+                text: string,
+                img: object
+            }[]; //link to Simulation
         }
     }
 }
 
-export const Data: data = {
+type gates = {
+    [k: string]: {
+        title: string,
+        category: string,
+        image: object,
+        data: {
+            "Description": string[];
+            "Truth Table": {
+                "Inputs": {
+                    [x: string]: number[],
+                },
+                "Outputs": {
+                    [y: string]: number[]
+                }
+            };
+            "Components": string[];
+            "Simulation": object[]; // link to Simulation
+        }
+    }
+}
+
+const circuits = '@/assets/images/circuits/'
+const tutorials = '@/assets/images/items/tutorials/'
+const gallery = '@/assets/images/items/gallery/'
+
+const Components: components = {
     "Redstone Dust": {
         title: "Redstone Dust",
         category: "Basic Components",
+        image: images.redstone,
         data: {
             "Introduction": [
                 "A glowing red dust that forms the foundation of redstone engineering in Minecraft.",
@@ -40,7 +80,7 @@ export const Data: data = {
             ],
             "Mechanics": [
                 "Redstone signal travels through the dust one block at a time per redstone tick (game update).",
-                "Signal strength weakens by one level for every 15 blocks traveled.",
+                "Signal strength weakens by one level for every block traveled.",
                 "Repeaters can be used to extend and strengthen signals."
             ],
             "Technical Information": [
@@ -48,24 +88,25 @@ export const Data: data = {
                 "Can be powered by various sources and transmits the power level as a signal."
             ],
             "Tutorials": [
-                "Basic redstone line",
-                "Branching redstone signals",
-                "Using redstone dust with pistons"
+                { text: "Basic redstone line", img: require(tutorials + 'r1.png') },
+                { text: "Branching redstone signals", img: require(tutorials + 'r2.png') },
+                { text: "Using redstone dust with pistons", img: require(tutorials + 'r3.png') }
             ],
             "Trivia": [
-                "Redstone is inspired by real-world redstone, a mineral with no electrical properties.",
-                "Redstone dust can be used to craft some items like redstone torches and repeaters."
+                "The block has 1,296 possible block state combinations, the highest of all blocks as of 1.15.2, beating fire's 512 and note block's 800.",
+                "According to Minecraft Education, redstone dust contains radioactive elements."
             ],
             "Gallery": [
-                "Image of redstone dust on blocks",
-                "Image of redstone dust powering a redstone torch"
+                { text: "Image of redstone dust on blocks", img: require(gallery + 'r1.png') },
+                { text: "Image of redstone dust powering a redstone torch", img: require(gallery + 'r1.png') },
             ]
         },
-        
+
     },
     "Redstone Torch": {
         title: "Redstone Torch",
         category: "Basic Components",
+        image: images.rtorch,
         data: {
             "Introduction": [
                 "A Redstone torch is a light-emitting block, similar to a regular Torch, except dimmer. ",
@@ -93,23 +134,24 @@ export const Data: data = {
                 "Deactivates when the block it's attached to is powered."
             ],
             "Tutorials": [
-                "Crafting redstone torches",
-                "Making a redstone NOT gate"
+                { text: "Crafting redstone torches", img: require(tutorials + 'rt1.png') },
+                { text: "Making a redstone NOT gate", img: require(tutorials + 'rt2.png') }
             ],
             "Trivia": [
                 "In Minecraft Earth, the icon in the inventory shows an unlit redstone torch",
             ],
             "Gallery": [
-                "Image of redstone torch",
-                "Image of unlit redstone torch",
-                "Image of torch on wall",
-                "Image of unlit torch on wall"
+                { text: "Image of redstone torch", img: require(gallery + 'rt1.png') },
+                { text: "Image of unlit redstone torch", img: require(gallery + 'rt2.png') },
+                { text: "Image of torch on wall", img: require(gallery + 'rt3.png') },
+                { text: "Image of unlit torch on wall", img: require(gallery + 'rt4.png') },
             ]
         }
     },
     "Redstone Repeater": {
         "title": "Redstone Repeater",
         "category": "Basic Components",
+        image: images.repeater,
         "data": {
             "Introduction": [
                 "A block used in redstone circuits to delay signals, repeat signals, or prevent backflow of signals.",
@@ -139,23 +181,24 @@ export const Data: data = {
                 "Can be powered from the back, and outputs power to the front."
             ],
             "Tutorials": [
-                "Creating a basic redstone repeater circuit",
-                "Using repeaters to synchronize pistons",
-                "Building a redstone clock with repeaters"
+                { text: "Creating a basic redstone repeater circuit", img: require(tutorials + 'rr1.png') },
+                { text: "Using repeaters to synchronize pistons", img: require(tutorials + 'rr2.png') },
+                { text: "Building a redstone clock with repeaters", img: require(tutorials + 'rr3.png') }
             ],
             "Trivia": [
                 "Redstone repeaters were added to the game in Beta 1.3.",
                 "They can lock other repeaters when powered, a feature added in version 1.5."
             ],
             "Gallery": [
-                "Image of redstone repeater in a circuit",
-                "Image of repeater delay settings"
+                { text: "Image of redstone repeater in a circuit", img: require(gallery + 'rr1.png') },
+                { text: "Image of repeater delay settings", img: require(gallery + 'rr2.png') },
             ]
         }
     },
     "Lever": {
         "title": "Lever",
         "category": "Basic Components",
+        image: images.lever,
         "data": {
             "Introduction": [
                 "A simple switch used to activate or deactivate redstone devices and mechanisms.",
@@ -185,23 +228,24 @@ export const Data: data = {
                 "Emits a constant redstone signal of strength 15 when on."
             ],
             "Tutorials": [
-                "Using a lever to control a door",
-                "Setting up a lever-activated trap",
-                "Integrating a lever into a redstone circuit"
+                { text: "Using a lever to control a door", img: require(tutorials + 'l1.png') },
+                { text: "Setting up a lever-activated trap", img: require(tutorials + 'l2.png') },
+                { text: "Integrating a lever into a redstone circuit", img: require(tutorials + 'l3.png') }
             ],
             "Trivia": [
                 "Levers are one of the simplest redstone components, functioning as a basic switch.",
                 "Can be placed on almost any solid block, including the sides and bottoms of blocks."
             ],
             "Gallery": [
-                "Image of lever in the on position",
-                "Image of lever controlling a redstone lamp"
+                { text: "Image of lever in the on position", img: require(gallery + 'l1.png') },
+                { text: "Image of lever controlling a redstone lamp", img: require(gallery + 'l2.png') }
             ]
         }
     },
     "Redstone Lamp": {
         "title": "Redstone Lamp",
         "category": "Basic Components",
+        image: images.lamp,
         "data": {
             "Introduction": [
                 "A block that emits light when powered by a redstone signal.",
@@ -231,205 +275,246 @@ export const Data: data = {
                 "Emits a light level of 15 when powered, equivalent to glowstone."
             ],
             "Tutorials": [
-                "Creating a redstone lamp lighting system",
-                "Using redstone lamps with daylight sensors",
-                "Building a redstone lamp indicator panel"
+                { text: "Creating a redstone lamp lighting system", img: require(tutorials + 'rl1.png') },
+                { text: "Using redstone lamps with daylight sensors", img: require(tutorials + 'rl2.png') },
+                { text: "Building a redstone lamp indicator panel", img: require(tutorials + 'rl3.png') }
             ],
             "Trivia": [
                 "Redstone lamps were added in version 1.2.1.",
                 "Unlike torches, redstone lamps can be controlled with redstone circuits for more dynamic lighting."
             ],
             "Gallery": [
-                "Image of redstone lamp in the on state",
-                "Image of redstone lamp controlled by a lever"
+                { text: "Image of redstone lamp in the on state", img: require(gallery + 'rl1.png') },
+                { text: "Image of redstone lamp controlled by a lever", img: require(gallery + 'rl2.png') }
             ]
         }
-    },
-    
-    "XOR Gate": {
-        title: "XOR Gate",
-        category: "Digital Logic Gates",
-        data: {
-            "Introduction": [
-                "A glowing red dust that forms the foundation of redstone engineering in Minecraft.",
-                "Used to transmit electrical signals to power and activate various contraptions."
+    }
+}
+
+const Gates: gates = {
+    "NOT Gate": {
+        "title": "NOT Gate",
+        "category": "Logic Gates",
+        image: images.not,
+        "data": {
+            "Description": [
+                "A logic gate that inverts its input signal.",
+                "Outputs a signal when the input is off, and vice versa."
             ],
-            "Obtaining": [
-                "Mined from redstone ore found underground.",
-                "Redstone ore drops redstone dust when mined with any tool."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 1]
+                },
+                "Outputs": {
+                    "F": [1, 0]
+                }
+            },
+            "Components": [
+                "1 Redstone torch",
+                "1 Solid block"
             ],
-            "Properties": [
-                "Glowing red powder that can be placed on top of solid blocks.",
-                "Stacks up to 64 redstone dust per inventory slot."
-            ],
-            "Usage": [
-                "Placed as a wire to carry redstone signals between components.",
-                "Can be activated by redstone torches, buttons, levers, and other redstone components.",
-                "Signal strength weakens over distance."
-            ],
-            "Mechanics": [
-                "Redstone signal travels through the dust one block at a time per redstone tick (game update).",
-                "Signal strength weakens by one level for every 15 blocks traveled.",
-                "Repeaters can be used to extend and strengthen signals."
-            ],
-            "Technical Information": [
-                "Redstone dust is a block entity with data values for signal strength (0-15).",
-                "Can be powered by various sources and transmits the power level as a signal."
-            ],
-            "Tutorials": [
-                "Basic redstone line",
-                "Branching redstone signals",
-                "Using redstone dust with pistons"
-            ],
-            "Trivia": [
-                "Redstone is inspired by real-world redstone, a mineral with no electrical properties.",
-                "Redstone dust can be used to craft some items like redstone torches and repeaters."
-            ],
-            "Gallery": [
-                "Image of redstone dust on blocks",
-                "Image of redstone dust powering a redstone torch"
-            ]
-        }
-    },
-    "NOR Gate": {
-        title: "XOR Gate",
-        category: "Digital Logic Gates",
-        data: {
-            "Introduction": [
-                "A glowing red dust that forms the foundation of redstone engineering in Minecraft.",
-                "Used to transmit electrical signals to power and activate various contraptions."
-            ],
-            "Obtaining": [
-                "Mined from redstone ore found underground.",
-                "Redstone ore drops redstone dust when mined with any tool."
-            ],
-            "Properties": [
-                "Glowing red powder that can be placed on top of solid blocks.",
-                "Stacks up to 64 redstone dust per inventory slot."
-            ],
-            "Usage": [
-                "Placed as a wire to carry redstone signals between components.",
-                "Can be activated by redstone torches, buttons, levers, and other redstone components.",
-                "Signal strength weakens over distance."
-            ],
-            "Mechanics": [
-                "Redstone signal travels through the dust one block at a time per redstone tick (game update).",
-                "Signal strength weakens by one level for every 15 blocks traveled.",
-                "Repeaters can be used to extend and strengthen signals."
-            ],
-            "Technical Information": [
-                "Redstone dust is a block entity with data values for signal strength (0-15).",
-                "Can be powered by various sources and transmits the power level as a signal."
-            ],
-            "Tutorials": [
-                "Basic redstone line",
-                "Branching redstone signals",
-                "Using redstone dust with pistons"
-            ],
-            "Trivia": [
-                "Redstone is inspired by real-world redstone, a mineral with no electrical properties.",
-                "Redstone dust can be used to craft some items like redstone torches and repeaters."
-            ],
-            "Gallery": [
-                "Image of redstone dust on blocks",
-                "Image of redstone dust powering a redstone torch"
+            "Simulation": [
+                require(circuits + 'NOT/NOT0.png'),
+                require(circuits + 'NOT/NOT1.png')
             ]
         }
     },
     "OR Gate": {
-        title: "XOR Gate",
-        category: "Digital Logic Gates",
-        data: {
-            "Introduction": [
-                "A glowing red dust that forms the foundation of redstone engineering in Minecraft.",
-                "Used to transmit electrical signals to power and activate various contraptions."
+        "title": "OR Gate",
+        "category": "Logic Gates",
+        image: images.or,
+        "data": {
+            "Description": [
+                "A logic gate that accepts 2 or more inputs.",
+                "Outputs a signal when either input is on."
             ],
-            "Obtaining": [
-                "Mined from redstone ore found underground.",
-                "Redstone ore drops redstone dust when mined with any tool."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 0, 1, 1],
+                    "B": [0, 1, 0, 1]
+                },
+                "Outputs": {
+                    "F": [0, 1, 1, 1]
+                }
+            },
+            "Components": [
+                "4 Redstone dust",
+                "2 Redstone repeater"
             ],
-            "Properties": [
-                "Glowing red powder that can be placed on top of solid blocks.",
-                "Stacks up to 64 redstone dust per inventory slot."
+            "Simulation": [
+                require(circuits + 'OR/OR00.png'),
+                require(circuits + 'OR/OR01.png'),
+                require(circuits + 'OR/OR10.png'),
+                require(circuits + 'OR/OR11.png')
+            ]
+        }
+    },
+    "NOR Gate": {
+        "title": "NOR Gate",
+        "category": "Logic Gates",
+        image: images.nor,
+        "data": {
+            "Description": [
+                "A logic gate that accepts 2 or more inputs.",
+                "Outputs a signal when no input is on."
             ],
-            "Usage": [
-                "Placed as a wire to carry redstone signals between components.",
-                "Can be activated by redstone torches, buttons, levers, and other redstone components.",
-                "Signal strength weakens over distance."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 0, 1, 1],
+                    "B": [0, 1, 0, 1]
+                },
+                "Outputs": {
+                    "F": [1, 0, 0, 0]
+                }
+            },
+            "Components": [
+                "3 Redstone dust",
+                "2 Redstone repeaters",
+                "1 Restone torch",
+                "1 Solid block"
             ],
-            "Mechanics": [
-                "Redstone signal travels through the dust one block at a time per redstone tick (game update).",
-                "Signal strength weakens by one level for every 15 blocks traveled.",
-                "Repeaters can be used to extend and strengthen signals."
-            ],
-            "Technical Information": [
-                "Redstone dust is a block entity with data values for signal strength (0-15).",
-                "Can be powered by various sources and transmits the power level as a signal."
-            ],
-            "Tutorials": [
-                "Basic redstone line",
-                "Branching redstone signals",
-                "Using redstone dust with pistons"
-            ],
-            "Trivia": [
-                "Redstone is inspired by real-world redstone, a mineral with no electrical properties.",
-                "Redstone dust can be used to craft some items like redstone torches and repeaters."
-            ],
-            "Gallery": [
-                "Image of redstone dust on blocks",
-                "Image of redstone dust powering a redstone torch"
+            "Simulation": [
+                require(circuits + 'NOR/NOR00.png'),
+                require(circuits + 'NOR/NOR01.png'),
+                require(circuits + 'NOR/NOR10.png'),
+                require(circuits + 'NOR/NOR11.png')
             ]
         }
     },
     "AND Gate": {
-        title: "XOR Gate",
-        category: "Digital Logic Gates",
-        data: {
-            "Introduction": [
-                "A glowing red dust that forms the foundation of redstone engineering in Minecraft.",
-                "Used to transmit electrical signals to power and activate various contraptions."
+        "title": "AND Gate",
+        "category": "Logic Gates",
+        image: images.and,
+        "data": {
+            "Description": [
+                "A logic gate that accepts 2 or more inputs.",
+                "Outputs a signal when all inputs are on"
             ],
-            "Obtaining": [
-                "Mined from redstone ore found underground.",
-                "Redstone ore drops redstone dust when mined with any tool."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 0, 1, 1],
+                    "B": [0, 1, 0, 1]
+                },
+                "Outputs": {
+                    "F": [0, 0, 0, 1]
+                }
+            },
+            "Components": [
+                "3 Redstone torches",
+                "3 Solid blocks",
+                "2 Redstone dust"
             ],
-            "Properties": [
-                "Glowing red powder that can be placed on top of solid blocks.",
-                "Stacks up to 64 redstone dust per inventory slot."
+            "Simulation": [
+                require(circuits + 'AND/AND00.png'),
+                require(circuits + 'AND/AND01.png'),
+                require(circuits + 'AND/AND10.png'),
+                require(circuits + 'AND/AND11.png')
+            ]
+        }
+    },
+    "NAND Gate": {
+        "title": "NAND Gate",
+        "category": "Logic Gates",
+        image: images.nand,
+        "data": {
+            "Description": [
+                "A logic gate that accepts 2 or more inputs.",
+                "Outputs a signal when either inputs or no inputs are on, but not all inputs."
             ],
-            "Usage": [
-                "Placed as a wire to carry redstone signals between components.",
-                "Can be activated by redstone torches, buttons, levers, and other redstone components.",
-                "Signal strength weakens over distance."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 0, 1, 1],
+                    "B": [0, 1, 0, 1]
+                },
+                "Outputs": {
+                    "F": [1, 1, 1, 0]
+                }
+            },
+            "Components": [
+                "2 Redstone dust",
+                "2 Redstone torches",
+                "2 Solid blocks"
             ],
-            "Mechanics": [
-                "Redstone signal travels through the dust one block at a time per redstone tick (game update).",
-                "Signal strength weakens by one level for every 15 blocks traveled.",
-                "Repeaters can be used to extend and strengthen signals."
+            "Simulation": [
+                require(circuits + 'NAND/NAND00.png'),
+                require(circuits + 'NAND/NAND01.png'),
+                require(circuits + 'NAND/NAND10.png'),
+                require(circuits + 'NAND/NAND11.png')
+            ]
+        }
+    },
+    "XOR Gate": {
+        "title": "XOR Gate",
+        "category": "Logic Gates",
+        image: images.xor,
+        "data": {
+            "Description": [
+                "A logic gate that accepts 2 or more inputs.",
+                "Outputs a signal when either, but not both inputs are on"
             ],
-            "Technical Information": [
-                "Redstone dust is a block entity with data values for signal strength (0-15).",
-                "Can be powered by various sources and transmits the power level as a signal."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 0, 1, 1],
+                    "B": [0, 1, 0, 1]
+                },
+                "Outputs": {
+                    "F": [0, 1, 1, 0]
+                }
+            },
+            "Components": [
+                "8 Redstone dust",
+                "8 Solid blocks",
+                "5 Redstone torches",
+                "2 Redstone repeaters"
             ],
-            "Tutorials": [
-                "Basic redstone line",
-                "Branching redstone signals",
-                "Using redstone dust with pistons"
+            "Simulation": [
+                require(circuits + 'XOR/XOR00.png'),
+                require(circuits + 'XOR/XOR01.png'),
+                require(circuits + 'XOR/XOR10.png'),
+                require(circuits + 'XOR/XOR11.png')
+            ]
+        }
+    },
+    "XNOR Gate": {
+        "title": "XNOR Gate",
+        "category": "Logic Gates",
+        image: images.xnor,
+        "data": {
+            "Description": [
+                "A logic gate that accepts 2 or more inputs.",
+                "Outputs a signal when both inputs or no inputs are on"
             ],
-            "Trivia": [
-                "Redstone is inspired by real-world redstone, a mineral with no electrical properties.",
-                "Redstone dust can be used to craft some items like redstone torches and repeaters."
+            "Truth Table": {
+                "Inputs": {
+                    "A": [0, 0, 1, 1],
+                    "B": [0, 1, 0, 1]
+                },
+                "Outputs": {
+                    "F": [1, 0, 0, 1]
+                }
+            },
+            "Components": [
+                "8 Redstone dust",
+                "8 Solid blocks",
+                "6 Redstone torches",
+                "2 Redstone repeaters"
             ],
-            "Gallery": [
-                "Image of redstone dust on blocks",
-                "Image of redstone dust powering a redstone torch"
+            "Simulation": [
+                require(circuits + 'XNOR/XNOR00.png'),
+                require(circuits + 'XNOR/XNOR01.png'),
+                require(circuits + 'XNOR/XNOR10.png'),
+                require(circuits + 'XNOR/XNOR11.png')
             ]
         }
     }
-    // "Redstone Torch": {
-    //     // Similar structure for Redstone Torch and Repeater outlines
-    // },
-    // "Repeater": {
-    //     // Similar structure for Repeater outlines
-    // }
+}
+
+export const Data: data = {
+    Components,
+    Gates
+}
+
+export const Merged = {
+    ...Components,
+    ...Gates,
 }

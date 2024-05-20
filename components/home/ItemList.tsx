@@ -12,6 +12,7 @@ type ItemListProps = {
 
 type ItemProps = {
     name: string,
+    category: string,
     image?: object,
     href?: string,
     border?: boolean,
@@ -39,7 +40,7 @@ ItemList.Item = (props: ItemProps) => {
     return (
         <Link
             style={styles.press}
-            href={{ pathname: '/(main)/articles/[article]', params: { article: props.name } }}
+            href={{ pathname: '/(main)/articles/[article]', params: { category: props.category, article: props.name } }}
             asChild
         >
             <Pressable>

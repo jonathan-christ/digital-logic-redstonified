@@ -1,20 +1,24 @@
 import React, { ReactNode, ReactPortal } from 'react';
-import { StyleSheet, ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, ScrollView, ImageBackground, Dimensions } from 'react-native';
 import { Text, View } from '../Themed';
 import { useFonts } from 'expo-font';
 import Header from './Header';
 import Body from './Body';
+import images from '@/assets/images';
+
 
 type ArticleProps = {
     children: ReactNode
 }
 
+const { height } = Dimensions.get('window')
+
 const Article = ({ children }: ArticleProps) => {
     return (
         <ScrollView>
-            <View style={styles.view}>
+            <ImageBackground style={styles.view} source={images.bg_menu}>
                 {children}
-            </View>
+            </ImageBackground>
         </ScrollView>
     )
 }
@@ -31,9 +35,9 @@ const styles = StyleSheet.create({
     view: {
         flex: 1,
         position: 'relative',
-        height: 'auto',
-        paddingBottom: 40,
+        height: '100%',
         width: '100%',
+        marginBottom: height*0.1,
         fontFamily: 'Minecraft'
     }
 })

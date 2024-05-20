@@ -12,6 +12,7 @@ type ItemListProps = {
 
 type ItemProps = {
     name: string,
+    category: string,
     image?: object,
     href?: string
 }
@@ -31,14 +32,14 @@ SearchList.Item = (props: ItemProps) => {
     return (
         <Link
             style={{ width: '100%' }}
-            href={{ pathname: '/(main)/articles/[article]', params: { article: props.name } }}
+            href={{ pathname: '/(main)/articles/[article]', params: { category: props.category, article: props.name } }}
             asChild
         >
             <Pressable>
                 {({ pressed }) => (
                     <View style={styles.item}>
                         <View style={[styles.imgCont, (pressed ? Colors.borderHL : {})]}>
-                            <Image blurRadius={5} style={styles.image} source={props.image ?? images.title} />
+                            <Image style={styles.image} source={props.image ?? images.title} />
                         </View>
                         <Text style={[styles.title, (pressed ? textHL : {})]}>{props.name}</Text>
                     </View>

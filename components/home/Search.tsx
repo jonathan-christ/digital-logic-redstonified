@@ -1,7 +1,7 @@
 // Search.tsx
 import React, { useState } from 'react';
 import { SearchBar } from '@rneui/themed';
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 import Colors from '@/constants/Colors';
 
@@ -26,10 +26,10 @@ const Search: React.FunctionComponent<SearchBarComponentProps> = ({ onSearch }) 
     <View style={styles.view}>
       <SearchBar
         style={{ fontSize: 16, fontFamily: 'Minecraft', color: 'white' }}
-        onBlur={()=> focusHandler(false)}
-        onFocus={()=> focusHandler(true)}
+        onBlur={() => focusHandler(false)}
+        onFocus={() => focusHandler(true)}
         placeholder={focused ? "" : "Enter search terms..."}
-        containerStyle={{ ...styles.search, ...Colors.border, ...(focused ? Colors.borderHL : {}) }}
+        containerStyle={[styles.search, Colors.border, (focused ? Colors.borderHL : {})]}
         inputContainerStyle={styles.input}
         onChangeText={updateSearch}
         value={search}

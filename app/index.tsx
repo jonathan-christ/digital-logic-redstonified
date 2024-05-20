@@ -6,7 +6,6 @@ import { StyleSheet, Pressable, ImageBackground } from 'react-native';
 // import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 import { router } from 'expo-router';
-import React from 'react';
 
 export default function Page() {
   return (
@@ -36,13 +35,14 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   container: {
     flex: 1,
     flexDirection: 'column',
+    position: 'relative'
   }
 
 });
