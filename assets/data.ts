@@ -98,7 +98,7 @@ const Components: components = {
             ],
             "Gallery": [
                 { text: "Image of redstone dust on blocks", img: require(gallery + 'r1.png') },
-                { text: "Image of redstone dust powering a redstone torch", img: require(gallery + 'r1.png') },
+                { text: "Image of redstone dust powering a redstone torch", img: require(gallery + 'r2.png') },
             ]
         },
 
